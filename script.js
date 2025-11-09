@@ -731,7 +731,7 @@ function addLoadingScreen() {
     loadingScreen.innerHTML = `
         <div class="loading-content">
             <div class="loading-spinner"></div>
-            <h2>Loading Papa's Legacy...</h2>
+            <h2>Loading C.P. Jain's Legacy...</h2>
         </div>
     `;
     
@@ -933,7 +933,7 @@ function addSectionCelebrations() {
 // Initialize celebration effects
 document.addEventListener('DOMContentLoaded', addCelebrationEffects);
 
-// Music Controls Functionality
+// Music Controls Functionality with Auto-Play
 function initMusicControls() {
     const musicToggle = document.getElementById('musicToggle');
     const backgroundMusic = document.getElementById('backgroundMusic');
@@ -942,6 +942,56 @@ function initMusicControls() {
     
     let isPlaying = false;
     
+    // Enhanced auto-play music functionality
+    function attemptAutoPlay() {
+        // Start with muted to bypass browser restrictions
+        backgroundMusic.muted = true;
+        backgroundMusic.play().then(() => {
+            console.log('🎵 Muted music started, will unmute on first interaction');
+            isPlaying = true;
+            musicToggle.classList.add('playing');
+            musicText.textContent = 'Music Playing (Click to Unmute)';
+            musicIcon.className = 'fas fa-volume-mute';
+            
+            // Auto-unmute after 2 seconds
+            setTimeout(() => {
+                backgroundMusic.muted = false;
+                musicText.textContent = 'Pause Music';
+                musicIcon.className = 'fas fa-pause';
+                console.log('🎵 Music unmuted automatically');
+            }, 2000);
+            
+        }).catch(error => {
+            console.log('Even muted auto-play blocked:', error);
+            musicText.textContent = 'Click to Play Music';
+            // Show YouTube player as immediate fallback
+            const youtubePlayer = document.getElementById('youtube-player');
+            if (youtubePlayer) {
+                youtubePlayer.style.display = 'block';
+                console.log('🎵 YouTube music player activated');
+            }
+        });
+    }
+    
+    // Multiple auto-play attempts
+    setTimeout(attemptAutoPlay, 500);   // First attempt
+    setTimeout(attemptAutoPlay, 1500);  // Second attempt
+    setTimeout(attemptAutoPlay, 3000);  // Third attempt
+    
+    // Auto-play on any user interaction
+    function enableAutoPlayOnInteraction() {
+        if (!isPlaying) {
+            attemptAutoPlay();
+        }
+        document.removeEventListener('click', enableAutoPlayOnInteraction);
+        document.removeEventListener('touchstart', enableAutoPlayOnInteraction);
+        document.removeEventListener('keydown', enableAutoPlayOnInteraction);
+    }
+    
+    document.addEventListener('click', enableAutoPlayOnInteraction);
+    document.addEventListener('touchstart', enableAutoPlayOnInteraction);
+    document.addEventListener('keydown', enableAutoPlayOnInteraction);
+    
     musicToggle.addEventListener('click', function() {
         if (isPlaying) {
             backgroundMusic.pause();
@@ -949,6 +999,11 @@ function initMusicControls() {
             musicToggle.classList.remove('playing');
             musicText.textContent = 'Play Music';
             musicIcon.className = 'fas fa-music';
+            // Hide YouTube player when pausing
+            const youtubePlayer = document.getElementById('youtube-player');
+            if (youtubePlayer) {
+                youtubePlayer.style.display = 'none';
+            }
         } else {
             backgroundMusic.play().then(() => {
                 isPlaying = true;
@@ -957,8 +1012,15 @@ function initMusicControls() {
                 musicIcon.className = 'fas fa-pause';
             }).catch(error => {
                 console.log('Music playback failed:', error);
-                // Fallback for browsers that block autoplay
-                musicText.textContent = 'Click to Play';
+                // Show YouTube player as fallback
+                const youtubePlayer = document.getElementById('youtube-player');
+                if (youtubePlayer) {
+                    youtubePlayer.style.display = 'block';
+                    isPlaying = true;
+                    musicToggle.classList.add('playing');
+                    musicText.textContent = 'YouTube Music Playing';
+                    musicIcon.className = 'fas fa-pause';
+                }
             });
         }
     });
@@ -986,6 +1048,25 @@ function initMusicControls() {
 // Initialize music controls
 document.addEventListener('DOMContentLoaded', initMusicControls);
 
-console.log("🎉 MIND-BLOWING Papa's Legacy Website Loaded Successfully! 🎉");
-console.log("🚀 Celebrating 30+ years of excellence and service to humanity with INCREDIBLE effects! ✨");
+// Immediate music auto-play attempt
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        const audio = document.getElementById('backgroundMusic');
+        if (audio) {
+            audio.muted = true;
+            audio.play().then(() => {
+                console.log('🎵 Initial muted auto-play successful');
+                setTimeout(() => {
+                    audio.muted = false;
+                    console.log('🎵 Music unmuted after page load');
+                }, 1500);
+            }).catch(err => {
+                console.log('🎵 Initial auto-play blocked:', err);
+            });
+        }
+    }, 100);
+});
+
+console.log("🎉 MIND-BLOWING C.P. Jain's Legacy Website Loaded Successfully! 🎉");
+console.log("🚀 Celebrating 35+ years of excellence and service to humanity with INCREDIBLE effects! ✨");
 console.log("🌟 Prepare to be AMAZED by the visual spectacle! 🎊");
