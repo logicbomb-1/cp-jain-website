@@ -57,16 +57,16 @@
                 <i class="fas fa-music"></i>
                 <span class="music-text">Play Music</span>
             </button>
-            <audio id="backgroundMusic" loop preload="auto">
+            <audio id="backgroundMusic" loop preload="auto" autoplay>
+                <source src="music.mp3" type="audio/mpeg">
                 <source src="indian-music.mp3" type="audio/mpeg">
                 <source src="indian-music.ogg" type="audio/ogg">
-                <source src="https://www.youtube.com/watch?v=LydCtAe6lXs" type="audio/mpeg">
             </audio>
             
             <!-- YouTube Music Fallback -->
             <div id="youtube-player" style="display: none;">
                 <iframe width="1" height="1" 
-                        src="https://www.youtube.com/watch?v=LydCtAe6lXs" 
+                        src="https://www.youtube.com/embed/LydCtAe6lXs?autoplay=1&mute=0&loop=1&playlist=LydCtAe6lXs&controls=0" 
                         frameborder="0" 
                         allow="autoplay; encrypted-media; picture-in-picture" 
                         allowfullscreen
