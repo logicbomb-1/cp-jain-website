@@ -2660,3 +2660,37 @@ h1, h2, h3, h4, h5, h6 {
     50% { background-position: 50% 100%; }
     75% { background-position: 0% 50%; }
 }
+
+/* Music notification pulse animation */
+@keyframes pulse {
+    0% { 
+        transform: scale(1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(255, 107, 107, 0.5);
+    }
+    100% { 
+        transform: scale(1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+}
+
+/* Enhanced music button styling */
+.music-toggle.playing {
+    background: linear-gradient(45deg, #4CAF50, #45a049) !important;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5) !important;
+    animation: pulse-success 2s ease-in-out infinite !important;
+}
+
+@keyframes pulse-success {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+    }
+    50% { 
+        transform: scale(1.02);
+        box-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
+    }
+}
