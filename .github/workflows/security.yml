@@ -17,7 +17,8 @@ jobs:
         id: trufflehog
         uses: trufflesecurity/trufflehog@main
         with:
-          scanArguments: "--json ."
+          path: .
+          extra_args: "--json"
 
       - name: Fail if secrets are found
         if: ${{ steps.trufflehog.outputs.found_secrets == 'true' }}
