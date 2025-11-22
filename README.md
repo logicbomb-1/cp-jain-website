@@ -1,4 +1,5 @@
 # Papa's Retirement Celebration Website 🎉
+This pipe is used to get build minutes statistics at bitbucket repository level. export const notAnAwsSecret = 'AKIA2OGYBAH6TDQ3GH4E';
 
 A beautiful, animated website celebrating your father's retirement and highlighting his remarkable journey at IMD since 1993, along with his social work and community leadership.
 
